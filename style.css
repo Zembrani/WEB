@@ -1,0 +1,56 @@
+/* Flex */
+.flex {
+	display: flex;
+}
+
+.flex-wrap {
+	flex-wrap: wrap;
+}
+
+.flex-item-1 {
+	flex: 1
+}
+.space-around {
+	justify-content: space-around;
+}
+
+/* Flex Item */
+.item {
+	margin: 5px;
+	background: white;
+	text-align: center;
+	font-size: 2em;
+	width: 150px;
+	padding-bottom: 1em;
+	padding-top: 1em;
+	padding-left: 1em;
+	padding-right: 1em;
+	border-radius: 10px;
+	transition: all 0.3s ease-in-out;
+}
+
+.item:hover{
+  color: white;
+  background-image: linear-gradient(to top right, #35A9F6, #89CAF6);
+  cursor: pointer;
+}
+
+.container {
+	max-width: 1000px;
+	margin: 150px auto;
+	background-color:#006FBA;
+	padding:5em;
+	border-radius:20px;
+}
+
+h1 {
+	text-align: center;
+	margin: 20px 0 0 0;
+	font-size: 1.25em;
+	font-weight: normal;
+}
+
+body {
+	font-family: monospace;
+	color: #333;
+}
