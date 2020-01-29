@@ -12,14 +12,18 @@
 	function myFunction(link) {
 	window.open(link);
 	}
+
 	</script>
 	
 	<img src="LOGO_COMPANHIA.png" alt="Companhia Águas de Joinville" class="img-logo" width="300">
-	<section class="container space-around flex flex-wrap">
-		<div class="item" onclick="myFunction('http://google.com')">Google</div>
-		<div class="item" onclick="myFunction('http://youtube.com')">YouTube</div>
-		<div class="item" onclick="myFunction('http://hotmail.com')">Hotmail</div>
-		<div class="item" onclick="myFunction('http://github.com')">GitHub</div>
+	<section class="container space-around flex flex-wrap" id="demo">
+	<script>
+		nameList = ["Google", "YouTube", "Hotmail", "GitHub"];
+		for(x of nameList){
+			document.write("<div class=\"item\" onclick=\"myFunction('www." + x.toLowerCase() + ".com')\">" + x + "</div>");
+		}
+	</script>
+
 	</section>
 
 
