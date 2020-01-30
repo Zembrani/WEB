@@ -3,7 +3,17 @@
   <head>
     <title>JavaScript Challenges</title>
   </head>
-
+  <style>
+  #emailpara {
+  display:none;
+  }
+  </style>
+  <script>
+  function toggleEmail() {
+  document.getElementById("emailpara").style.display = "block";
+  }
+  
+  </script>
   <body>
     <form action="">
       <fieldset>
@@ -12,7 +22,7 @@
 
         <p id="Ross">
           <label>
-            <input type="checkbox" name="subscribe" id="subscribe">
+            <input type="checkbox" onclick="toggleEmail()" name="subscribe" id="subscribe">
             Yes! I would like to receive all of your free candy!
           </label>
         </p>
