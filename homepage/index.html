@@ -3,24 +3,28 @@
 <head>
 	<meta charset="utf-8"/>
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
-	<title>Sistemas</title>
+	<title>HomePage</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
-<body>
+<body background="wallpaper_1.jpg">
 
 	<script>
-	function myFunction(link) {
+	function openLink(link) {
 	window.open(link);
 	}
-
+	var changeBackground = setInterval(setBg, 3000);
+ 
+	function setBg() {
+		var x = document.body;
+		x.background = x.background == "wallpaper_1.jpg" ? "wallpaper_2.jpg" : "wallpaper_1.jpg";
+	}
 	</script>
 	
-	<img src="LOGO_COMPANHIA.png" alt="Companhia Águas de Joinville" class="img-logo" width="300">
-	<section class="container space-around flex flex-wrap" id="demo">
+	<section class="container space-around flex flex-wrap">
 	<script>
 		nameList = ["Google", "YouTube", "Hotmail", "GitHub"];
 		for(x of nameList){
-			document.write("<div class=\"item\" onclick=\"myFunction('www." + x.toLowerCase() + ".com')\">" + x + "</div>");
+			document.write("<div class=\"item\" onclick=\"openLink('www." + x.toLowerCase() + ".com')\">" + x + "</div>");
 		}
 	</script>
 
