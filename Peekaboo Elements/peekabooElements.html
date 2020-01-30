@@ -10,7 +10,10 @@
   </style>
   <script>
   function toggleEmail() {
-  document.getElementById("emailpara").style.display = "block";
+  var emailpara = document.getElementById("emailpara");
+  var chekbox = document.getElementById("subscribe");
+  emailpara.style.display = chekbox.checked ? "block" : "none";
+  emailpara.style.backgroundColor = "#99bbff";
   }
   
   </script>
@@ -33,6 +36,12 @@
             <input type="text" name="email" id="email">
           </label>
         </p>
+		<noscript>
+			<label>
+				Email Address: 
+				<input type="text" name="email" id="email">
+			</label>	
+		</noscript>
 
       </fieldset>
     </form>
