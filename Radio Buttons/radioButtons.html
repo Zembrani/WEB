@@ -5,10 +5,27 @@
   </head>
 
   <script>
-
+	function checkForm() {
+		var optStrawberry = document.getElementById("optstraw");
+		var optBlueberry = document.getElementById("optblue");
+		
+		var list = [optStrawberry.checked, optBlueberry.checked];
+		
+		if (!list.some(check)){
+			window.alert("Please select your favourite berry!");
+			return false;
+			}
+		return true;
+	}
+	
+	function check(value){
+		return value == true;
+	}
+	
+  
   </script>
   <body>
-    <form action="mailto:me@fakeemail.com">
+    <form action="mailto:me@fakeemail.com" onsubmit="return checkForm()">
 		<fieldset>
 			<legend>Radio buttons and Check Boxes</legend>
 			<p>
@@ -23,7 +40,7 @@
 				</label>
 			</p>
 		</fieldset>
-		<input type="submit" value="Check it out!">
+		<input type="submit" value="Check it out!" onclick="checkForm()">
 	</form>
   </body>
 </html>
