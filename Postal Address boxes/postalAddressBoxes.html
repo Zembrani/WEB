@@ -6,8 +6,10 @@
 
   <script>
   function setHomeAddress() {
-	var text = document.getElementById("homeaddress")
-	window.alert(text.value);
+	var text = document.getElementById("homeaddress");
+	var checkbox = document.getElementById("homepostalcheck");
+	text.value = "address";
+	text.disabled = checkbox.checked ? false : true;
   }
   
   </script>
@@ -29,7 +31,7 @@
 					Same as above
 				</label>
 				<br>
-				<input name="homeaddress" id="homeaddress"></input>
+				<input name="homeaddress" id="homeaddress" disabled = "true"></input>
 			</p>
 		</fieldset>
     </form>
