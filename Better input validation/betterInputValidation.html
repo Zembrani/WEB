@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>JavaScript Challenges</title>
+  </head>
+	<style>
+	.errormsg {
+  color: red;
+	display: none;
+}
+	</style>
+  <script>
+	function checkForm() {
+	var form1 = document.getElementById("fullname");
+	var form2 = document.getElementById("streetaddr");
+	if(form1.value=="" || form2.value==""){
+		window.alert("hei ta vazio");
+		return false;
+	}
+	return true;
+	} 
+  </script>
+  <body>
+    <form action="mailto:me@fakeemail.com" onsubmit="return checkForm();">
+		<fieldset>
+
+			<legend>Personal details</legend>
+			<p>
+				<label>
+					Full name:
+					<input type="text" name="fullname" id="fullname">
+				</label>
+			</p>
+			<p class="errormsg" id="nameerrormsg">Please enter your name above</p>
+				<p>
+					<label>
+						Street Address:
+						<input type="text" name="streetaddr" id="streetaddr">
+					</label>
+				</p>
+			<p class="errormsg" id="addrerrormsg">Please enter your street address</p>
+
+		</fieldset>
+		<input type="submit" value="Submit it!"> 
+	</form>
+  </body>
+</html>
