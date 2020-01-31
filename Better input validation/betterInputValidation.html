@@ -11,14 +11,28 @@
 	</style>
   <script>
 	function checkForm() {
-	var form1 = document.getElementById("fullname");
-	var form2 = document.getElementById("streetaddr");
-	if(form1.value=="" || form2.value==""){
-		window.alert("hei ta vazio");
-		return false;
-	}
-	return true;
+		var formList = [
+										document.getElementById("fullname").value, 
+										document.getElementById("streetaddr").value
+										];
+		var listIds = [
+										"nameerrormsg", 
+										"addrerrormsg"
+									];
+									
+		var someEmpty = false;
+		
+	//the follow code doesn't need be modified if more forms are added.	
+		for(var i = 0; i < formList.length; i++){
+			document.getElementById(listIds[i]).style.display = "none";
+			if(formList[i] == ""){
+				document.getElementById(listIds[i]).style.display = "block";			
+				someEmpty = true;
+			}
+		}
+		return !someEmpty;
 	} 
+
   </script>
   <body>
     <form action="mailto:me@fakeemail.com" onsubmit="return checkForm();">
