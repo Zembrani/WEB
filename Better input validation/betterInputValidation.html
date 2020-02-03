@@ -15,7 +15,7 @@
 										document.getElementById("fullname").value, 
 										document.getElementById("streetaddr").value,
 										document.getElementById("housenmbr").value,
-										document.getElementById("postcode").value
+										document.getElementById("postcodenmbr").value
 										];
 		var listIds = [
 										"nameerrormsg", 
@@ -23,31 +23,37 @@
 										"nmbrerrormsg",
 										"postcodeerrormsg"
 									];
+		//this object is to redefine the error message.
+		var listErrorText = {
+												'nmbrerrormsg':'Please enter your house number',
+												'postcodeerrormsg':'Please enter your postcode number'
+												};
+		//this list is to define which text area are numbers.
 		var listNumbersForms = [
-														"nmbrerrormsg",
-														"postcodeerrormsg"
-														]	;				
+														false,
+														false,
+														true,
+														true
+														];				
 		var someEmpty = false;
 		
 	//the 'for' doesn't need be modified if more forms are added.	
-		for(var i = 0; i < formList.length; i++){
-			document.getElementById(listIds[i]).style.display = "none";
-			if(formList[i] == ""){
-				document.getElementById(listIds[i]).style.display = "block";			
+		for(var i = 0; i < formList.length; i++) {
+		var text = document.getElementById(listIds[i]);
+			text.style.display = "none";
+			if(formList[i] == "") {
+				text.style.display = "block";			
 				someEmpty = true;
 			}
-		}
-	//verification of a valid number
-		for(var i = 0; i < listNumbersForms.length; i++){
-			var number = document.getElementById(listNumbersForms[i]).value;
-			if(isNaN(number.value)){
-				document.getElementById(listNumbersForms[i]).innerHTML = 'Please enter a valid number';
-				document.getElementById(listNumbersForms[i]).style.display = "block";
-			} else {
-				document.getElementById(listNumbersForms[i]).innerHTML = 'Please enter your house number';
+		
+			if(listNumbersForms[i] && isNaN(formList[i])) {
+				text.innerHTML = 'Please enter a valid number';
+				text.style.display = "block";
+				someEmpty = true;
+			} else if(listNumbersForms[i]){
+				text.innerHTML = listErrorText[listIds[i]];
 			}
 		}
-
 
 		return !someEmpty;
 	} 
