@@ -34,29 +34,49 @@
 														false,
 														true,
 														true
-														];				
-		var someEmpty = false;
-		
-	//the 'for' doesn't need be modified if more forms are added.	
+														];
+		var listNumbersLength = [
+														false,
+														false,
+														false,
+														true
+														];														
+		var someWrong = false;
+		var listSomeWrong = [];
+		var result;
+			
 		for(var i = 0; i < formList.length; i++) {
-		var text = document.getElementById(listIds[i]);
-			text.style.display = "none";
+			someWrong = false;
+			var text = document.getElementById(listIds[i]);
+			
 			if(formList[i] == "") {
-				text.style.display = "block";			
-				someEmpty = true;
+				someWrong = true;
 			}
-		
-			if(listNumbersForms[i] && isNaN(formList[i])) {
-				text.innerHTML = 'Please enter a valid number';
-				text.style.display = "block";
-				someEmpty = true;
-			} else if(listNumbersForms[i]){
-				text.innerHTML = listErrorText[listIds[i]];
+			
+			if(listNumbersForms[i] && isNaN(formList[i]) && someWrong == false) {
+					text.innerHTML = 'Please enter a valid number';
+					someWrong = true;
+			} else if(listNumbersLength[i] && formList[i].length != 9 && someWrong == false){
+					text.innerHTML = "This postcode isn't a valid one.";
+					someWrong = true;
+				} else if(listNumbersForms[i]) {
+					text.innerHTML = listErrorText[listIds[i]];
 			}
-		}
 
-		return !someEmpty;
-	} 
+			if(someWrong == true) {
+				text.style.display = "block";
+			} else {
+				text.style.display = "none";
+			}
+			listSomeWrong.push(someWrong);
+		}
+		result = listSomeWrong.find(ifTrue);
+		return !result;
+	}
+	
+	function ifTrue(value) {
+		return value == true;
+	}
 
   </script>
   <body>
@@ -91,7 +111,7 @@
 					<input type="text" name="postcodenmbr" id="postcodenmbr" placeholder="Postcode" size="9" maxlength="9">
 				</label>
 			</p>
-			<p class="errormsg" id="postcodeerrormsg">Please enter your postcode</p>
+			<p class="errormsg" id="postcodeerrormsg" value="Please enter your postcode">Please enter your postcode</p>
 		</fieldset>
 		<input type="submit" value="Submit it!"> 
 	</form>
