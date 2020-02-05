@@ -44,17 +44,7 @@ function checkForm() {
 			if(formList[i] == "") {
 				someWrong = true;
 			}
-			
-			if(listNumbersForms[i] && isNaN(formList[i]) && someWrong == false) {
-					text.innerHTML = 'Please enter a valid number';
-					someWrong = true;
-			} else if(listNumbersLength[i] && formList[i].length != 9 && someWrong == false){
-					text.innerHTML = "This postcode isn't a valid one.";
-					someWrong = true;
-				} else if(listNumbersForms[i]) {
-					text.innerHTML = listErrorText[listIds[i]];
-			}
-			
+
 			if(listIds[i] == "emailaddresserrormsg" && someWrong == false) {
 			someWrong = checkEmail(formList[i], text);
 			}
@@ -79,8 +69,7 @@ function checkForm() {
 		var index2 = input.lastIndexOf('.');
 		var diff = parseInt((index2 - index), 10);
 
-		
-		if(index == -1 || index2 == -1 || index == 0 || index2 == 0 || index == (input.length)-1 || index2 == (input.length)-1 || index2 == (input.length)-2 || index2 < index || diff < 3) {
+		if(index == -1 || index2 == -1 || index == 0 || index2 == 0 || index == (input.length)-1 || index2 == (input.length)-1 || index2 == (input.length)-2 || index2 < index || diff < 2) {
 			text.innerHTML = 'Please enter a valid email';
 			return true;
 		}		
