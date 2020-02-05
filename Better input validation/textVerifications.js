@@ -3,13 +3,15 @@ function checkForm() {
 										document.getElementById("fullname").value, 
 										document.getElementById("streetaddr").value,
 										document.getElementById("housenmbr").value,
-										document.getElementById("postcodenmbr").value
+										document.getElementById("postcodenmbr").value,
+										document.getElementById("emailaddress").value
 										];
 		var listIds = [
 										"nameerrormsg", 
 										"addrerrormsg",
 										"nmbrerrormsg",
-										"postcodeerrormsg"
+										"postcodeerrormsg",
+										"emailaddresserrormsg"
 									];
 		//this object is to redefine the error message.
 		var listErrorText = {
@@ -21,13 +23,15 @@ function checkForm() {
 														false,
 														false,
 														true,
-														true
+														true,
+														false
 														];
 		var listNumbersLength = [
 														false,
 														false,
 														false,
-														true
+														true,
+														false
 														];														
 		var someWrong = false;
 		var listSomeWrong = [];
@@ -50,7 +54,11 @@ function checkForm() {
 				} else if(listNumbersForms[i]) {
 					text.innerHTML = listErrorText[listIds[i]];
 			}
-
+			
+			if(listIds[i] == "emailaddresserrormsg" && someWrong == false) {
+			someWrong = checkEmail(formList[i], text);
+			}
+			
 			if(someWrong == true) {
 				text.style.display = "block";
 			} else {
@@ -64,4 +72,16 @@ function checkForm() {
 	
 	function ifTrue(value) {
 		return value == true;
+	}
+	
+	function checkEmail(input, text) {
+		var index = input.indexOf('@');
+		var index2 = input.lastIndexOf('.');
+		var diff = parseInt((index2 - index), 10);
+
+		
+		if(index == -1 || index2 == -1 || index == 0 || index2 == 0 || index == (input.length)-1 || index2 == (input.length)-1 || index2 == (input.length)-2 || index2 < index || diff < 3) {
+			text.innerHTML = 'Please enter a valid email';
+			return true;
+		}		
 	}
