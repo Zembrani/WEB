@@ -1,47 +1,46 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html lang="en">
   <head>
-    <title>JavaScript Challenges</title>
-  </head>
-  <style>
-  #emailpara {
-  display:none;
-  }
-  </style>
-  <script>
-  function toggleEmail() {
-  var emailpara = document.getElementById("emailpara");
-  var chekbox = document.getElementById("subscribe");
-  emailpara.style.display = chekbox.checked ? "block" : "none";
-  emailpara.style.backgroundColor = "#99bbff";
-  }
-  
-  </script>
-  <body>
-    <form action="">
-      <fieldset>
+    <title>Javascript challenge 10</title>
+    <script type="text/javascript" src="jquery-3.4.1.js"></script>
+    <script type="text/javascript">
+      $(function(){
 
+        $("p#emailpara").hide();
+
+        $("input#subscribe").on( "click" , 
+					function(event){
+						var checked = $( "input:checked" ).length;
+						if(checked === 1) {
+							$("p#emailpara").show("slow");					
+						} else {
+							$("p#emailpara").hide("slow");					
+						}
+					}
+				);
+      });
+    </script>
+
+  </head>
+  <body>
+    <h1>Testing jQuery</h1>
+    <form action="mailto:me@example.com" method="post">
+      <fieldset>
         <legend>Email subscriptions</legend>
 
-        <p id="Ross">
+        <p id="subscribepara">
           <label>
-            <input type="checkbox" onclick="toggleEmail()" name="subscribe" id="subscribe">
-            Yes! I would like to receive all of your free candy!
+            <input type="checkbox" name="subscribe" id="subscribe">
+            Yes! I would like to receive the occasional newsletter via email
           </label>
         </p>
 
         <p id="emailpara">
           <label>
-            Email Address: 
+            Email Address:
             <input type="text" name="email" id="email">
           </label>
         </p>
-		<noscript>
-			<label>
-				Email Address: 
-				<input type="text" name="email" id="email">
-			</label>	
-		</noscript>
 
       </fieldset>
     </form>
