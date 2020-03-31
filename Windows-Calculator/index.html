@@ -2,60 +2,78 @@
 <html lang="en">
   <head>
     <title>JavaScript Challenges</title>
-		<link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Quattrocento+Sans&display=swap" rel="stylesheet">
   </head>
   <script type="text/javascript" src="textVerification.js"></script>
   <body>
     <div id="container" >
         <div id="top">
-
-
+            <div id="header">
+                <div id="title" class="not-selectable">Calculator</div>
+                <div id="tab-icons">
+                    <div class="buttonHoverTop buttonActiveTop" id="min"></div>
+                    <div class="buttonHoverTop buttonActiveTop" id="max"></div>
+                    <div id="close"></div>
+                </div>
+            </div>
+            <div id="options">
+                <div class="buttonHoverTop buttonActiveTop" id="menuOptions"></div>
+                <div class="buttonHoverTop buttonActiveTop" id="history"></div>
+            </div>
+            <div id="result">
+                <div id="expression"></div>
+                <div id="res">0</div>
+            </div>
         </div>
-        <div id="bottom">
+        <div class="not-selectable" id="bottom">
+            
+            <div class="row">
+                <span data-number="mc" class="toprow buttonHoverBottom buttonActiveBottom">MC</span>
+                <span data-number="mr" class="toprow buttonHoverBottom buttonActiveBottom">MR</span>
+                <span data-number="m+" class="toprow buttonHoverBottom buttonActiveBottom">M+</span>
+                <span data-number="m-" class="toprow buttonHoverBottom buttonActiveBottom">M-</span>
+                <span data-number="ms" class="toprow buttonHoverBottom buttonActiveBottom">MS</span>
+                <span data-number="m" class="toprow buttonHoverBottom buttonActiveBottom">M</span>
+            </div>
+            
             <div id="flex-container">
                 <div class="row">
-                    <span data-number="%" class="toprow">MC</span>
-                    <span data-number="CE" class="toprow">MR</span>
-                    <span data-number="C" class="toprow">M+</span>
-                    <span data-number="C" class="toprow">M-</span>
-                    <span data-number="C" class="toprow">MS</span>
-                    <span data-number="C" class="toprow">M</span>
+                    <span data-number="%" class="buttonHoverBottom buttonActiveBottom">%</span>
+                    <span data-number="CE" class="C buttonHoverBottom buttonActiveBottom">CE</span>
+                    <span data-number="C" class="C buttonHoverBottom buttonActiveBottom">C</span>
+                    <span data-number="backspace" class="buttonHoverBottom buttonActiveBottom">&#8678;</span>
                 </div>
                 <div class="row">
-                    <span data-number="%">%</span>
-                    <span data-number="CE">CE</span>
-                    <span data-number="C">C</span>
-                    <span data-number="backspace">&#8678;</span>
+                    <span data-number="divx" class="xitalic buttonHoverBottom buttonActiveBottom">&#8543;x</span>
+                    <span data-number="quadrado" class="xitalic buttonHoverBottom buttonActiveBottom">x²</span>
+                    <span data-number="raiz" class="xitalic buttonHoverBottom buttonActiveBottom">&radic;x</span>
+                    <span data-number="/" class="buttonHoverBottom buttonActiveBottom">&#xF7;</span>
                 </div>
                 <div class="row">
-                    <span data-number="divx" class="xitalic">&#8543;x</span>
-                    <span data-number="quadrado" class="xitalic">x²</span>
-                    <span data-number="raiz" class="xitalic">&radic;x</span>
-                    <span data-number="/">&#xF7;</span>
+                    <span data-number="7" class="numbers font buttonHoverBottom buttonActiveBottom">7</span>
+                    <span data-number="8" class="numbers font buttonHoverBottom buttonActiveBottom">8</span>
+                    <span data-number="9" class="numbers font buttonHoverBottom buttonActiveBottom">9</span>
+                    <span data-number="*" class="buttonHoverBottom buttonActiveBottom">&#215;</span>
                 </div>
                 <div class="row">
-                    <span data-number="7" class="numbers">7</span>
-                    <span data-number="8" class="numbers">8</span>
-                    <span data-number="9" class="numbers">9</span>
-                    <span data-number="*">&#215;</span>
+                    <span data-number="4" class="numbers font buttonHoverBottom buttonActiveBottom">4</span>
+                    <span data-number="5" class="numbers font buttonHoverBottom buttonActiveBottom">5</span>
+                    <span data-number="6" class="numbers font buttonHoverBottom buttonActiveBottom">6</span>
+                    <span data-number="-" class="buttonHoverBottom buttonActiveBottom">-</span>
                 </div>
                 <div class="row">
-                    <span data-number="4" class="numbers">4</span>
-                    <span data-number="5" class="numbers">5</span>
-                    <span data-number="6" class="numbers">6</span>
-                    <span data-number="-">-</span>
+                    <span data-number="1" class="numbers font buttonHoverBottom buttonActiveBottom">1</span>
+                    <span data-number="2" class="numbers font buttonHoverBottom buttonActiveBottom">2</span>
+                    <span data-number="3" class="numbers font buttonHoverBottom buttonActiveBottom">3</span>
+                    <span data-number="+" class="buttonHoverBottom buttonActiveBottom">+</span>
                 </div>
                 <div class="row">
-                    <span data-number="3" class="numbers">3</span>
-                    <span data-number="2" class="numbers">2</span>
-                    <span data-number="1" class="numbers">1</span>
-                    <span data-number="+">+</span>
-                </div>
-                <div class="row">
-                    <span data-number="neg" class="numbers">+/-</span>
-                    <span data-number="0" class="numbers">0</span>
-                    <span data-number="comma" class="numbers">,</span>
-                    <span data-number="equal" class="equal">=</span>
+                    <span data-number="neg" class="numbers font2 buttonHoverBottom buttonActiveBottom">+/-</span>
+                    <span data-number="0" class="numbers font buttonHoverBottom buttonActiveBottom">0</span>
+                    <span data-number="comma" class="numbers font2 buttonHoverBottom buttonActiveBottom">.</span>
+                    <span data-number="equal" class="equal buttonHoverBottom buttonActiveBottom">=</span>
                 </div>
             </div>
         </div>
