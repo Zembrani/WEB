@@ -5,37 +5,38 @@
         <link rel="stylesheet" type="text/css" href="style.css">
         <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Quattrocento+Sans&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap" rel="stylesheet">
   </head>
-  <script type="text/javascript" src="textVerification.js"></script>
+  <script type="text/javascript" src="javascript.js"></script>
   <body>
     <div id="container" >
         <div id="top">
             <div id="header">
                 <div id="title" class="not-selectable">Calculator</div>
                 <div id="tab-icons">
-                    <div class="buttonHoverTop buttonActiveTop" id="min"></div>
-                    <div class="buttonHoverTop buttonActiveTop" id="max"></div>
-                    <div id="close"></div>
+                    <div class="buttonHoverTop buttonActiveTop" id="min" title="Minimize">&nbsp</div>
+                    <div class="buttonHoverTop buttonActiveTop" id="max" title="Maximise">&nbsp</div>
+                    <div id="close" title="Close">&nbsp</div>
                 </div>
             </div>
             <div id="options">
-                <div class="buttonHoverTop buttonActiveTop" id="menuOptions"></div>
-                <div class="buttonHoverTop buttonActiveTop" id="history"></div>
+                <div class="buttonHoverTop buttonActiveTop" id="menuOptions" title="Open Navigation"></div>
+                <div class="buttonHoverTop buttonActiveTop" id="history" title="History"></div>
             </div>
             <div id="result">
-                <div id="expression"></div>
+                <div class="not-selectable" id="expression">&nbsp</div>
                 <div id="res">0</div>
             </div>
         </div>
         <div class="not-selectable" id="bottom">
             
             <div class="row">
-                <span data-number="mc" class="toprow buttonHoverBottom buttonActiveBottom">MC</span>
-                <span data-number="mr" class="toprow buttonHoverBottom buttonActiveBottom">MR</span>
-                <span data-number="m+" class="toprow buttonHoverBottom buttonActiveBottom">M+</span>
-                <span data-number="m-" class="toprow buttonHoverBottom buttonActiveBottom">M-</span>
-                <span data-number="ms" class="toprow buttonHoverBottom buttonActiveBottom">MS</span>
-                <span data-number="m" class="toprow buttonHoverBottom buttonActiveBottom">M</span>
+                <span data-number="mc" class="toprow buttonHoverBottom buttonActiveBottom" title="Clean All Memory">MC</span>
+                <span data-number="mr" class="toprow buttonHoverBottom buttonActiveBottom" title="Memory Recall">MR</span>
+                <span data-number="m+" class="toprow buttonHoverBottom buttonActiveBottom" title="Memory Add">M+</span>
+                <span data-number="m-" class="toprow buttonHoverBottom buttonActiveBottom" title="Memory Subtraction">M-</span>
+                <span data-number="ms" class="toprow buttonHoverBottom buttonActiveBottom" title="Memory Store">MS</span>
+                <span data-number="m" class="toprow buttonHoverBottom buttonActiveBottom" title="Memory">M</span>
             </div>
             
             <div id="flex-container">
@@ -46,9 +47,9 @@
                     <span data-number="backspace" class="buttonHoverBottom buttonActiveBottom">&#8678;</span>
                 </div>
                 <div class="row">
-                    <span data-number="divx" class="xitalic buttonHoverBottom buttonActiveBottom">&#8543;x</span>
-                    <span data-number="quadrado" class="xitalic buttonHoverBottom buttonActiveBottom">x²</span>
-                    <span data-number="raiz" class="xitalic buttonHoverBottom buttonActiveBottom">&radic;x</span>
+                    <span data-number="1/" class="xitalic buttonHoverBottom buttonActiveBottom">&#8543;x</span>
+                    <span data-number="sqrt" class="xitalic buttonHoverBottom buttonActiveBottom">x²</span>
+                    <span data-number="&radic;" class="xitalic buttonHoverBottom buttonActiveBottom">&radic;x</span>
                     <span data-number="/" class="buttonHoverBottom buttonActiveBottom">&#xF7;</span>
                 </div>
                 <div class="row">
@@ -70,9 +71,9 @@
                     <span data-number="+" class="buttonHoverBottom buttonActiveBottom">+</span>
                 </div>
                 <div class="row">
-                    <span data-number="neg" class="numbers font2 buttonHoverBottom buttonActiveBottom">+/-</span>
+                    <span data-number="-" class="numbers font2 buttonHoverBottom buttonActiveBottom">+/-</span>
                     <span data-number="0" class="numbers font buttonHoverBottom buttonActiveBottom">0</span>
-                    <span data-number="comma" class="numbers font2 buttonHoverBottom buttonActiveBottom">.</span>
+                    <span data-number="." class="numbers font2 buttonHoverBottom buttonActiveBottom">.</span>
                     <span data-number="equal" class="equal buttonHoverBottom buttonActiveBottom">=</span>
                 </div>
             </div>
