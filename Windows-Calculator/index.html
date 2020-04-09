@@ -11,13 +11,15 @@
 </head>
 <script type="text/javascript" src="javascript.js"></script>
 
+
 <body>
     <div id="container">
         <div id="top">
             <div id="header">
                 <div id="title" class="not-selectable">Calculator</div>
                 <div id="tab-icons">
-                    <div class="buttonHoverTop buttonActiveTop" id="min" title="Minimize">&nbsp</div>
+                    <div class="buttonH
+                    overTop buttonActiveTop" id="min" title="Minimize">&nbsp</div>
                     <div class="buttonHoverTop buttonActiveTop" id="max" title="Maximise">&nbsp</div>
                     <div id="close" title="Close">&nbsp</div>
                 </div>
@@ -49,7 +51,7 @@
 
             <div id="flex-container">
                 <div class="row">
-                    <span data-number="%" class="buttonHoverBottom buttonActiveBottom">%</span>
+                    <span id="porcentage" class="buttonHoverBottom buttonActiveBottom">%</span>
                     <span id="CE" class="C buttonHoverBottom buttonActiveBottom">CE</span>
                     <span id="C" class="C buttonHoverBottom buttonActiveBottom">C</span>
                     <span id="backspace" class="buttonHoverBottom buttonActiveBottom">&#8678;</span>
@@ -79,9 +81,9 @@
                     <span data-number="+" class="buttonHoverBottom buttonActiveBottom">+</span>
                 </div>
                 <div class="row">
-                    <span data-number="-+" class="numbers font2 buttonHoverBottom buttonActiveBottom">+/-</span>
+                    <span id="neg" class="numbers font2 buttonHoverBottom buttonActiveBottom">+/-</span>
                     <span data-number="0" class="numbers font buttonHoverBottom buttonActiveBottom">0</span>
-                    <span data-number="." class="numbers font2 buttonHoverBottom buttonActiveBottom">.</span>
+                    <span id="dot" class="numbers font2 buttonHoverBottom buttonActiveBottom">.</span>
                     <span id="equal" class="equal buttonHoverBottom buttonActiveBottom">=</span>
                 </div>
             </div>
