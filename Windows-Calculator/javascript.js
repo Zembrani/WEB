@@ -21,7 +21,6 @@ function click() {
 
 }
 
-
 function screen(number) {
 
     var remove = document.getElementById("backspace");
@@ -44,14 +43,13 @@ function screen(number) {
     3 - sendo uma das funções;
     */
     var expreVal = expression.innerHTML;
-    var resVal = cleanComma(res.innerHTML);
+    var resVal = cleanComma(verifyScreen(res.innerHTML));
     var symbol = { "+": "+", "-": "-", "*": "*", "/": "/" };
 
     var lastSymbol = expreVal.substring(expreVal.length - 1, expreVal.length);
 
     //--------------------Add number on screen--------------------------//
     if (parseInt(number) > -1 && parseInt(number) < 10) {
-        var lastChar = expreVal.substring(expreVal.length - 1, expreVal.length);
         if (oldVal == "2") {
             aux.innerHTML = "1";
             expression.innerHTML = "";
@@ -75,22 +73,20 @@ function screen(number) {
             expression.innerHTML = "";
             oldVal = aux.innerHTML;
         }
+        console.log(oldVal);
         expreVal = expression.innerHTML;
-        //console.log(oldVal);
         if (lastSymbol in symbol && oldVal == "1") {
-            //console.log("primeiro if");
             expreVal = expreVal.substring(0, expreVal.length - 1);
             expression.innerHTML = expreVal + symbol[number];
             oldVal = "0";
         } else if (oldVal == "3") {
+        console.log("dentro do if oldval == 3");
             expression.innerHTML = expreVal + resVal + symbol[number];
             aux.innerHTML = "1";
         } else {
-            //console.log("else");
             expression.innerHTML = expreVal + resVal + symbol[number];
         }
         if (oldVal == "1") {
-            //console.log("oldval if");
             var tempExpre = expreVal + resVal;
             tempExpre = eval(tempExpre);
             res.innerHTML = verifyScreen(tempExpre);
@@ -100,7 +96,7 @@ function screen(number) {
 
     //--------Current values ​​in variables------------//
 
-    resVal = cleanComma(res.innerHTML);
+    resVal = cleanComma(verifyScreen(res.innerHTML));
     expreVal = expression.innerHTML;
 
     //--------------------Remove number--------------------------//
@@ -118,51 +114,55 @@ function screen(number) {
     c.onclick = function () {
         res.innerHTML = 0;
         expression.innerHTML = "";
+        res.style.fontSize = "33pt";
     }
 
     //--------------------Clean screen number only--------------------------//
     ce.onclick = function () {
         res.innerHTML = 0;
+        res.style.fontSize = "33pt";
     }
 
     //--------------------Does the calculations and show on the expression screen--------------------------//
     equal.onclick = function () {
-        resVal = cleanComma(res.innerHTML);
+        resVal = cleanComma(verifyScreen(res.innerHTML));
         var result;
         oldVal = aux.innerHTML;
 
         if (oldVal == "2") {
             var tempExpre = expression.innerHTML;
-            
+
             var index = tempExpre.lastIndexOf(lastSymbol);
             if (index !== -1) {
-                tempExpre = tempExpre.substring(index, tempExpre.length-3);
-                console.log("tempExpre dentro do if = " + tempExpre);
+                tempExpre = tempExpre.substring(index, tempExpre.length - 3);
             }
 
             tempExpre = resVal + tempExpre;
         } else {
             var tempExpre = expreVal + resVal;
         }
-        console.log("tempexpre = " + tempExpre);
-        console.log("resVal = " + resVal);
-
+        console.log(oldVal);
         result = eval(tempExpre);
-        result = verifyScreen(result);
-        console.log(result.toString().length);
-        
-        var length = result.length;
+        result = result.toString();
+        var firstSymbol = result.substring(0, 1);
+        var length = firstSymbol=="-" ? result.length-1 : result.length;
 
-        if(fontSize(length)==1) {
+        if (length > 11) {
+            expression.innerHTML = "";
             res.innerHTML = "Overflow";
         } else {
-            res.innerHTML = result;
-            expression.innerHTML = tempExpre + " = ";
+            res.innerHTML = verifyScreen(result);
+            expression.innerHTML = tempExpre + " =";
             aux.innerHTML = "2";
         }
+        if(oldVal==3){
+            aux.innerHTML = "3";
+        }
+        
     }
 
     dot.onclick = function () {
+        resVal = res.innerHTML;
         var indexDot = resVal.indexOf(".");
         if (indexDot !== -1) {
             return;
@@ -187,9 +187,19 @@ function screen(number) {
         let value = res.innerHTML;
         let result = 0;
 
-        result = parseFloat(eval("1/" + value).toFixed(3));
-        res.innerHTML = verifyScreen(result);
-        aux.innerHTML = "1";
+        verifyEqual();
+
+        result = 1 / parseFloat(value);
+        result = result.toFixed(3);
+        result = result.toString();
+
+        if (result.length > 11) {
+            expression.innerHTML = "";
+            res.innerHTML = "Overflow";
+        } else {
+            res.innerHTML = verifyScreen(result);
+            aux.innerHTML = "1";
+        }
         if (value === "0") {
             res.innerHTML = "Cannot divide by zero";
         }
@@ -197,21 +207,52 @@ function screen(number) {
     }
 
     pow.onclick = function () {
+        verifyEqual();
+
         let value = cleanComma(res.innerHTML);
-        res.innerHTML = verifyScreen(parseFloat(Math.pow(value, 2).toFixed(3)));
-        aux.innerHTML = "3";
+        let result = parseFloat(Math.pow(value, 2).toFixed(3));
+        result = result.toString();
+        
+        if (result.length > 11) {
+            expression.innerHTML = "";
+            res.innerHTML = "Overflow";
+        } else {
+            res.innerHTML = verifyScreen(result);
+            aux.innerHTML = "3";
+        }
     }
 
     sqrt.onclick = function () {
+        
+        verifyEqual();
+        
         let value = cleanComma(res.innerHTML);
-        res.innerHTML = verifyScreen(parseFloat(Math.sqrt(value).toFixed(3)));
+        let result = parseFloat(Math.sqrt(value).toFixed(6));
+        result = result.toString();
+
+        res.innerHTML = verifyScreen(result);
         aux.innerHTML = "3";
+
     }
 
+function verifyEqual () {
+    expreVal = expression.innerHTML;
+    lastSymbol = expreVal.substring(expreVal.length - 1, expreVal.length);
+
+    if(lastSymbol=="="){
+        expression.innerHTML = "";
+    }
+}
+
     porcentage.onclick = function () {
-        let valuePrcentg = res.innerHTML;
-        let valueAmount = eval(expreVal.substring(0, expreVal.length-1));
-        
+        let valuePrcentg = verifyScreen(res.innerHTML);
+        if(valuePrcentg=="0") {
+            res.innerHTML = "0";
+            return;
+        }
+
+        let valueAmount = eval(expreVal.substring(0, expreVal.length - 1));
+
         valuePrcentg = eval(valueAmount + "*" + valuePrcentg + "/100").toFixed(2);
         expression.innerHTML = expreVal + valuePrcentg;
         res.innerHTML = verifyScreen(valuePrcentg);
@@ -253,18 +294,22 @@ function verifyScreen(valueScreen) {
     valueScreen = valueScreen.toString();
     var firstSymbol = valueScreen.substring(0, 1);
     var isNegative = false;
+
+    if (valueScreen=="NaN" || valueScreen.includes("O")) {
+        res.innerHTML = "0";
+        return "0";
+    }
+
     if (firstSymbol === "-") {
         isNegative = true;
         valueScreen = valueScreen.substring(1, valueScreen.length);
     }
     valueScreen = cleanComma(valueScreen);
     var indexDot = findDot(valueScreen);
-
     if (indexDot > 3) {
         valueScreen = addComma(valueScreen, indexDot);
     }
-    
-    if(fontSize(valueScreen.length)==0){
+    if (fontSize(valueScreen.length) == 0) {
         if (isNegative == true) {
             valueScreen = "-" + valueScreen;
         }
@@ -274,14 +319,15 @@ function verifyScreen(valueScreen) {
     }
 }
 
-function fontSize (length) {
+function fontSize(length) {
     if (length < 11) {
         res.style.fontSize = "33pt";
     } else if (length > 10 && length < 12) {
         res.style.fontSize = "28pt";
-    } else if (length > 11 && length < 13) {
+    } else if (length > 12 && length < 15) {
         res.style.fontSize = "24pt";
-    } else if (length > 13) {
+    } else if (length > 14) {
+        res.style.fontSize = "24pt";
         return 1;
     }
     return 0;
