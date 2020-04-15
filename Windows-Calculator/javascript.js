@@ -10,6 +10,14 @@ function click() {
     var res = document.getElementById("res");
     var aux = document.getElementById("aux");
 
+    var mc = document.getElementById("mc");
+    var mr = document.getElementById("mr");
+    var mplus = document.getElementById("mplus");
+    var mminus = document.getElementById("mminus");
+    var mstore = document.getElementById("ms");
+    var m = document.getElementById("m");
+    var mwindow = document.getElementById("m");
+
 
     for (let i = 0; i < button.length; i++) {
         var keyboard = button[i];
@@ -50,9 +58,11 @@ function screen(number) {
 
     //--------------------Add number on screen--------------------------//
     if (parseInt(number) > -1 && parseInt(number) < 10) {
+        // console.log("numero " + oldVal);
         if (oldVal == "2") {
             aux.innerHTML = "1";
             expression.innerHTML = "";
+            expreVal = expression.innerHTML;
             oldVal = aux.innerHTML;
         }
         if (resVal === "0" || oldVal === "1" || oldVal === "3") {
@@ -68,23 +78,27 @@ function screen(number) {
     oldVal = aux.innerHTML;
     //--------------------Add expression on screen--------------------------//
     if (number in symbol) {
+        let temp;
         if (oldVal == "2") {
             aux.innerHTML = "1";
             expression.innerHTML = "";
             oldVal = aux.innerHTML;
         }
-        console.log(oldVal);
+        // console.log("operador " + oldVal);
         expreVal = expression.innerHTML;
         if (lastSymbol in symbol && oldVal == "1") {
             expreVal = expreVal.substring(0, expreVal.length - 1);
-            expression.innerHTML = expreVal + symbol[number];
+            temp = lastIsDot(expreVal);
+            expression.innerHTML = tmep + symbol[number];
             oldVal = "0";
         } else if (oldVal == "3") {
-        console.log("dentro do if oldval == 3");
-            expression.innerHTML = expreVal + resVal + symbol[number];
+            // console.log(expreVal);
+            temp = lastIsDot(expreVal + resVal);
+            expression.innerHTML = temp + symbol[number];
             aux.innerHTML = "1";
         } else {
-            expression.innerHTML = expreVal + resVal + symbol[number];
+            temp = lastIsDot(expreVal + resVal);
+            expression.innerHTML = temp + symbol[number];
         }
         if (oldVal == "1") {
             var tempExpre = expreVal + resVal;
@@ -127,38 +141,80 @@ function screen(number) {
     equal.onclick = function () {
         resVal = cleanComma(verifyScreen(res.innerHTML));
         var result;
+        var tempExpre
         oldVal = aux.innerHTML;
-
+        lastSymbol = expreVal.substring(expreVal.length-1, expreVal.length);
+        // console.log("oldval equal = " + oldVal);
+  
         if (oldVal == "2") {
-            var tempExpre = expression.innerHTML;
-
+            // console.log("oldval == 2");
+            tempExpre = expression.innerHTML;
+            
+            // console.log("lastSymbol " + lastSymbol);
             var index = tempExpre.lastIndexOf(lastSymbol);
             if (index !== -1) {
-                tempExpre = tempExpre.substring(index, tempExpre.length - 3);
+                tempExpre = tempExpre.substring(index, tempExpre.length - 2);
             }
-
+            
             tempExpre = resVal + tempExpre;
+            // console.log("temp expre dentro do if " + tempExpre);
+            if(tempExpre.includes("=")) {
+                aux.innerHTML = "2";
+                return;
+            }
         } else {
-            var tempExpre = expreVal + resVal;
+            // console.log("oldval == " + oldVal);
+            var firstSymbol = resVal.toString().substring(0, 1);
+            if (firstSymbol == "-") {
+                resVal = "(" + resVal + ")";
+            }
+            tempExpre = expreVal + resVal;
         }
-        console.log(oldVal);
-        result = eval(tempExpre);
+        //console.log(oldVal);
+
+        if(tempExpre.includes(".")) {
+            result = eval(tempExpre).toString();
+            // console.log("result = " + result);
+            let length = result.length;
+            let indexDot = result.indexOf(".");
+            console.log("indexdot = " + indexDot);
+            // console.log("tamanho = " + length);
+                result = parseFloat(result).toPrecision(10);
+
+            result = result.toString();
+            let cond = true;
+            console.log(result);
+            
+            while(cond==true){
+                let lastSymbol = result.substring(result.length-1, result.length);
+                if(lastSymbol=="0") {
+                    result = result.substring(0, result.length-1);
+                    cond = true;
+                } else if(lastSymbol=="."){
+                    result = result.substring(0, result.length-1);
+                    cond = false;
+                }else{
+                    cond = false;
+                }
+            }
+        }else{
+            result = eval(tempExpre);
+        }
         result = result.toString();
         var firstSymbol = result.substring(0, 1);
-        var length = firstSymbol=="-" ? result.length-1 : result.length;
+        var length = firstSymbol == "-" ? result.length - 1 : result.length;
 
         if (length > 11) {
             expression.innerHTML = "";
             res.innerHTML = "Overflow";
         } else {
             res.innerHTML = verifyScreen(result);
-            expression.innerHTML = tempExpre + " =";
+
+            expression.innerHTML = lastIsDot(tempExpre) + " =";
             aux.innerHTML = "2";
         }
-        if(oldVal==3){
-            aux.innerHTML = "3";
-        }
-        
+
+
     }
 
     dot.onclick = function () {
@@ -182,7 +238,7 @@ function screen(number) {
             res.innerHTML = verifyScreen("-" + resVal);
         }
     }
-    //--------------------Functions--------------------------//
+//--------------------Functions--------------------------//
     inverseMult.onclick = function () {
         let value = res.innerHTML;
         let result = 0;
@@ -212,7 +268,7 @@ function screen(number) {
         let value = cleanComma(res.innerHTML);
         let result = parseFloat(Math.pow(value, 2).toFixed(3));
         result = result.toString();
-        
+
         if (result.length > 11) {
             expression.innerHTML = "";
             res.innerHTML = "Overflow";
@@ -223,9 +279,9 @@ function screen(number) {
     }
 
     sqrt.onclick = function () {
-        
+
         verifyEqual();
-        
+
         let value = cleanComma(res.innerHTML);
         let result = parseFloat(Math.sqrt(value).toFixed(6));
         result = result.toString();
@@ -235,18 +291,18 @@ function screen(number) {
 
     }
 
-function verifyEqual () {
-    expreVal = expression.innerHTML;
-    lastSymbol = expreVal.substring(expreVal.length - 1, expreVal.length);
+    function verifyEqual() {
+        expreVal = expression.innerHTML;
+        lastSymbol = expreVal.substring(expreVal.length - 1, expreVal.length);
 
-    if(lastSymbol=="="){
-        expression.innerHTML = "";
+        if (lastSymbol == "=") {
+            expression.innerHTML = "";
+        }
     }
-}
 
     porcentage.onclick = function () {
         let valuePrcentg = verifyScreen(res.innerHTML);
-        if(valuePrcentg=="0") {
+        if (valuePrcentg == "0") {
             res.innerHTML = "0";
             return;
         }
@@ -257,9 +313,93 @@ function verifyEqual () {
         expression.innerHTML = expreVal + valuePrcentg;
         res.innerHTML = verifyScreen(valuePrcentg);
     }
+
+    //---------Memory functions----------------------//
+    m.onclick = function () {
+        mwindow.style.display = mwindow.style.display === 'block' ? 'none' : 'block';
+        textSize();
+    }
+
+    ms.onclick = function () {
+        if (res.innerHTML.includes("er")) {
+            return
+        } else {
+            mwindow.innerHTML = res.innerHTML;
+        }
+        aux.innerHTML = "3";
+    }
+
+    mr.onclick = function () {
+        res.innerHTML = verifyScreen(verifyIfIsText(mwindow.innerHTML));
+        aux.innerHTML = "3";
+    }
+
+    mc.onclick = function () {
+        mwindow.innerHTML = "There's nothing saved in your memory.";
+        textSize();
+        aux.innerHTML = "3";
+    }
+
+    mplus.onclick = function () {
+        if (res.innerHTML.includes("er")) {
+            return
+        } else {
+            let result = eval(cleanComma(verifyIfIsText(mwindow.innerHTML)) + "+" + cleanComma(res.innerHTML));
+            verifyIfIsOverflow(result);
+        }
+    }
+
+    mminus.onclick = function () {
+        if (res.innerHTML.includes("er")) {
+            return
+        } else {
+            let result = eval(cleanComma(verifyIfIsText(mwindow.innerHTML)) + "-(" + cleanComma(res.innerHTML) + ")");
+            verifyIfIsOverflow(result);
+        }
+    }
+
+    function textSize() {
+        mwindow.style.fontSize = mwindow.innerHTML.includes('er') ? '11pt' : '20pt';
+    }
+
+    function verifyIfIsText(value) {
+        value = value.toString();
+        return value.includes("er") ? "0" : value;
+    }
+
+    function verifyIfIsOverflow(result) {
+        result = result.toString();
+        let firstSymbol = result.substring(0, 1);
+        var length = firstSymbol == "-" ? result.length - 1 : result.length;
+        var negative = firstSymbol == "-" ? true : false;
+
+        if (length > 11) {
+            mwindow.innerHTML = "Overflow";
+        } else if(negative) {
+            result = mwindow.innerHTML.includes('There') ? res.innerHTML : verifyMemory(result.substring(1, length+1), length);
+            mwindow.innerHTML = "-" + result;
+        } else {
+            mwindow.innerHTML = mwindow.innerHTML.includes('There') ? res.innerHTML : verifyMemory(result, length);
+        }
+        textSize();
+        aux.innerHTML = "3";//sempre que o result é 0 ele altera o tamanho do res para o tamanho original.
+    }
+
+    function verifyMemory(value, length) {
+        var indexDot = findDot(value);
+        if (indexDot > 3) {
+            value = addComma(value, indexDot);
+        }
+        if (length<14) {
+            return value;
+        } else {
+            return verifyMemory(value.substring(0, value.length - 1));
+        }
+
+    }
 }
 
-//-----Verifications on screen value, length, dot, comma
+//-----Verifications on screen value, length, dot, comma---//
 
 function findDot(value) {
     var indexDot = value.indexOf(".");
@@ -295,7 +435,7 @@ function verifyScreen(valueScreen) {
     var firstSymbol = valueScreen.substring(0, 1);
     var isNegative = false;
 
-    if (valueScreen=="NaN" || valueScreen.includes("O")) {
+    if (valueScreen == "NaN" || valueScreen.includes("O")) {
         res.innerHTML = "0";
         return "0";
     }
@@ -309,6 +449,7 @@ function verifyScreen(valueScreen) {
     if (indexDot > 3) {
         valueScreen = addComma(valueScreen, indexDot);
     }
+
     if (fontSize(valueScreen.length) == 0) {
         if (isNegative == true) {
             valueScreen = "-" + valueScreen;
@@ -320,6 +461,7 @@ function verifyScreen(valueScreen) {
 }
 
 function fontSize(length) {
+    //console.log("tamanho = " + length);
     if (length < 11) {
         res.style.fontSize = "33pt";
     } else if (length > 10 && length < 12) {
@@ -332,3 +474,12 @@ function fontSize(length) {
     }
     return 0;
 }
+
+function lastIsDot(valueExpre) {
+    let lastSymbol = valueExpre.substring(valueExpre.length-1, valueExpre.length);
+    if(lastSymbol=="."){
+        valueExpre = valueExpre.substring(0, valueExpre.length-1);
+    }
+    return valueExpre;
+}
+

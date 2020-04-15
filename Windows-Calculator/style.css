@@ -133,6 +133,12 @@ body{
     height: 15px;
     padding-top: 0px;
     font-size: 10pt;
+    overflow: auto;
+    white-space: nowrap;
+}
+
+#expression::-webkit-scrollbar {
+    display: none;
 }
 
 #res {
@@ -157,6 +163,21 @@ body{
 #header #tab-icons #close:active {
     background-color: rgb(247, 111, 111);
     background-image: url(images/close-icon.png);
+}
+
+/*-----------------Memory-------------------*/
+
+#mwindow {
+    font-family: 'Ubuntu', sans-serif;
+    background-color: rgba(142, 179, 185, 0.986);
+    position: absolute;
+    display: none;
+    top: 180px;
+    height: 250px;
+    width: 260px;
+    text-align: right;
+    padding: 10px;
+    font-size: 11pt;
 }
 
 /*-----------------Bottom-------------------*/

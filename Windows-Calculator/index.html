@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>JavaScript Challenges</title>
+    <title>Calculadora Windows</title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Quattrocento+Sans&display=swap" rel="stylesheet">
@@ -34,19 +34,18 @@
                 <div id="aux">0</div>
             </div>
         </div>
+        <div class="not-selectable" id="mwindow">
+            <span>There's nothing saved in your memory.</span>
+        </div>
         <div class="not-selectable" id="bottom">
 
             <div class="row">
-                <span data-number="mc" class="toprow buttonHoverBottom buttonActiveBottom"
-                    title="Clean All Memory">MC</span>
-                <span data-number="mr" class="toprow buttonHoverBottom buttonActiveBottom"
-                    title="Memory Recall">MR</span>
-                <span data-number="m+" class="toprow buttonHoverBottom buttonActiveBottom" title="Memory Add">M+</span>
-                <span data-number="m-" class="toprow buttonHoverBottom buttonActiveBottom"
-                    title="Memory Subtraction">M-</span>
-                <span data-number="ms" class="toprow buttonHoverBottom buttonActiveBottom"
-                    title="Memory Store">MS</span>
-                <span data-number="m" class="toprow buttonHoverBottom buttonActiveBottom" title="Memory">M</span>
+                <span id="mc" class="toprow buttonHoverBottom buttonActiveBottom" title="Clean All Memory">MC</span>
+                <span id="mr" class="toprow buttonHoverBottom buttonActiveBottom" title="Memory Recall">MR</span>
+                <span id="mplus" class="toprow buttonHoverBottom buttonActiveBottom" title="Memory Add">M+</span>
+                <span id="mminus" class="toprow buttonHoverBottom buttonActiveBottom" title="Memory Subtraction">M-</span>
+                <span id="ms" class="toprow buttonHoverBottom buttonActiveBottom" title="Memory Store">MS</span>
+                <span id="m" class="toprow buttonHoverBottom buttonActiveBottom" title="Memory">M</span>
             </div>
 
             <div id="flex-container">
