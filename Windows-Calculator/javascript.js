@@ -218,7 +218,8 @@ function screen(number) {
     dot.onclick = function () {
         resVal = res.innerHTML;
         lastSymbol = expreVal.substring(expreVal.length - 1, expreVal.length);
-        if (lastSymbol in symbol) {
+        console.log(resVal);
+        if (lastSymbol in symbol && resVal == "0") {
             res.innerHTML = "0";
             resVal = getRes();
         }
